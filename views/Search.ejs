@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Страница поиска</title>
+  <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+  <script type="text/javascript" src="/public/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+ 
+<br> 
+Тип поиска:
+<br> 
+<select name="Тип поиска" class="options" id="option">
+  <option value="issue">Выдача</option>
+  <option value="documents">Оформление документов</option>
+</select>
+<p></p>
+<br> 
+Временной интервал:
+<br> 
+<select class="options" id="timeoption">
+  <option value="hour1">1 час</option>
+  <option value="hour2">2 часа</option>
+  <option value="hour3">3 часа</option>
+  <option value="hour4">4 часа</option>
+  <option value="hour5">5 часов</option>
+</select>
+<br> 
+<br> 
+<p></p>
+<button type="button" class="btn btn-primary" onclick="searchredir()">Поиск</button>
+
+
+ 
+   <script type="text/javascript" src="/public/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+
+ function searchredir() {
+
+        var select = document.getElementById("option");
+        var value = select.value;
+
+        var select2 = document.getElementById("timeoption");
+        var value2 = select2.value;
+
+        window.location.replace(`http://localhost:8440/search/${value}/${value2}`);
+  
+
+ }
+
+
+
+ function search() {
+
+          
+          var select = document.getElementById("option");
+          var value = select.value;
+
+          var x = new XMLHttpRequest();
+  
+      x.open("GET", `http://localhost:8440/search/${value}/`, true);
+        x.onload = function (){
+          alert( x.responseText);
+          
+
+                }
+                x.send(null);
+        
+      } 
+        
+
+
+
+</script>
+
+ </body>
+</html>
+

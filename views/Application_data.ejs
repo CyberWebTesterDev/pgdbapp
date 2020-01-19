@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Действующий процесс</title>
+ </head>
+ <body>
+  <table border="1">
+   <caption>Хронология действующего процесса по заявке <%= appnum%></caption>
+   <tr>
+    <th>Номер заявки</th>
+    <th>Схема</th>
+    <th>Таск</th>
+    <th>Дата создания таска</th>
+    <th>Состояние таска</th>
+    <th>ID процесса</th>
+    <th>Время перехода в состояние</th>
+   </tr>
+   <tr>
+ <td><%= appnum%></td>
+ <td><%= scheme_name%></td>
+ <td><%= task_name%></td>
+ <td><%= start_time%></td>
+ <td><%= task_state%></td>
+ <td><%= process_id%></td>
+ <td><%= obj[obj.length-1].state_time_ %></td>
+  </tr>
+  </table>
+ </body>
+</html>
+

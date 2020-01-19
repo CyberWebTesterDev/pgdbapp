@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Действующий процесс</title>
+  <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+  <script type="text/javascript" src="/public/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+  <button id="#test" type="button" class="btn btn-primary" onclick="test()">Тест</button>
+  <button id="#error" type="button" class="btn btn-primary" onclick="error()">Обработка ошибки</button>
+   <button id="#hide" type="button" class="btn btn-primary" onclick="hide()">Скрыть</button>
+  <h2 style="display:none;" id="uid"><%=obj[obj.length-1].id_%></h2>
+  
+  <div id="#maintable">
+  <table class="table table-dark">
+   <h2 >Хронология действующего процесса по заявке</h2>
+  
+   <tr>
+    <th>Номер заявки</th>
+    <th>Схема</th>
+    <th>Таск</th>
+    <th>Дата создания таска</th>
+    <th>Состояние таска</th>
+    <th>ID процесса <%=keyo[0]%></th>
+    <th>Время перехода в состояние <%=obj[0]%></th>
+   </tr>
+  <% obj.forEach(function(el, i, arr) { %>
+   <tr>
+ <td><%= obj[i].value_  %></td>
+ <td><%= obj[i].scheme_name  %></td>
+ <td><%= obj[i].task_name_  %></td>
+ <td><%= obj[i].start_time_  %></td>
+ <td><%= obj[i].task_state_  %></td>
+ <td><%= obj[i].id_  %> </td>
+ <td><%= obj[i].state_time_  %></td>
+  </tr>
+  <% }); %>
+  </table>
+</div>
+   <script type="text/javascript" src="/public/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  
+
+
+      function test() {
+
+        if (confirm("Вы уверены что хотите выполнить перезапуск таска заявки <%=JSON.stringify(obj[obj.length-1].value_)%>?"))
+
+         {
+
+          var x = new XMLHttpRequest();
+  
+      x.open("GET", "http://localhost:8440/retrytask/process/<%-JSON.stringify(obj[obj.length-1].id_)%>", true);
+        x.onload = function (){
+          alert( x.responseText);
+          location.reload(); 
+
+                }
+                x.send(null);
+        
+      } else {alert("Перезапуск таска НЕ выполнен");}
+
+      }
+
+      function error() {
+
+          if ("<%=JSON.stringify(obj[obj.length-1].task_state_)%>" == 2) {alert ("Текущее состояние ошибка") } 
+
+            else { alert ("Текущее состояние НЕ ошибка!");
+         $('#error').attr("disabled");
+
+        }
+
+      }
+
+
+function hide() {
+  var x = document.getElementById("#maintable");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} 
+
+        
+
+
+
+</script>
+
+ </body>
+</html>
+
